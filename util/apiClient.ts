@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const apiClient = axios.create({
-    baseURL:process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+    baseURL:process.env.REACT_APP_API_URL || 'https://to-do-backend-6per.onrender.com',
     timeout:10000,
     withCredentials: true,
     headers:{

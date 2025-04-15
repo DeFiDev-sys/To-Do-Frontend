@@ -1,9 +1,14 @@
 "use client";
 import ResetPassword from "@/Screens/PasswordScreen/ResetPassword";
+import { Metadata } from "next";
 import { redirect, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect } from "react";
 import { BounceLoader } from "react-spinners";
 import { toast } from "sonner";
+
+export const metadata: Metadata = {
+  title: 'Reset Password',
+}
 
 const Page = () => {
   return (

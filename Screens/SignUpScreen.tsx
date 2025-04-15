@@ -134,9 +134,6 @@ const SignUpScreen = () => {
               Login
             </Link>
           </div>
-          <Link href={"/forget-password"} className='hover:text-blue-600 hover:underline cursor-pointer'>
-            <span>Forgot Password</span>
-          </Link>
         </div>
       </form>
     </Form>

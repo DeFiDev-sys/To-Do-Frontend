@@ -1,6 +1,10 @@
 import SignUpScreen from "@/Screens/SignUpScreen";
+import { Metadata } from "next";
 import React from "react";
 
+export const metadata: Metadata = {
+  title: "Sign Up",
+};
 const page = () => {
   return (
     <div className='my-2 lg:my-0 p-5 lg:px-14 lg:py-10 2xl:p-40 min-h-dvh lg:shadow-2xl'>

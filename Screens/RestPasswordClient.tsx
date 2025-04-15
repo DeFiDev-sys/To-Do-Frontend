@@ -1,7 +1,7 @@
 "use client";
 
 import ResetPassword from "@/Screens/PasswordScreen/ResetPassword";
-import { redirect, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 import { BounceLoader } from "react-spinners";
 import { toast } from "sonner";
@@ -23,14 +23,14 @@ const ResetPasswordContent = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token") as string;
 
-  // const router = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     if (!token) {
       toast.error("Invalid token");
-      redirect("/SignIn");
+      router.push("https://to-do-frontend-theta.vercel.app/SignIn");
     }
-  }, [token]);
+  }, [router, token]);
 
   return (
     <div className='flex flex-col justify-center px-5 lg:px-10 2xl:px-20 min-h-dvh lg:shadow-2xl'>

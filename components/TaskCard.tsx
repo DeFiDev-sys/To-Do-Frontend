@@ -21,8 +21,8 @@ const TaskCard: React.FC<Task> = ({ task }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   return (
     <div className='flex flex-col gap-4 lg:gap-1.5'>
-      <CardHeader className='flex justify-between items-center'>
-        <div className='w-full'>
+      <CardHeader className='flex flex-col lg:flex-row justify-between items-center gap-5'>
+        <div className='w-full text-center lg:text-left'>
           <CardTitle>{task.title}</CardTitle>
         </div>
         <div className='flex gap-2 mx-2'>

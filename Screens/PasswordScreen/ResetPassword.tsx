@@ -9,7 +9,7 @@ import { ResetPasswordAction } from "@/reduxs/actions/UserActions";
 import { ResetPasswordScheme } from "@/types/definitions";
 import { useReduxNotifications } from "@/util/useReduxNotifications";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -23,7 +23,6 @@ const ResetPassword = ({ token }: tokenProps) => {
   const dispatch = useAppDispatch();
   const { loading, error, userStatus } = useAppSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof ResetPasswordScheme>>({
     resolver: zodResolver(ResetPasswordScheme),
@@ -49,7 +48,7 @@ const ResetPassword = ({ token }: tokenProps) => {
       }
       const res = await dispatch(ResetPasswordAction(token, values.password));
       if (res?.status === 200 || res?.statusText === "OK") {
-        return router.push("/SignIn");
+        window.location.href = "/SignIn";
       }
     } catch (error) {
       console.error("Changed of password failed:", error);

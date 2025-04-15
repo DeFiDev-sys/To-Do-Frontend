@@ -48,8 +48,8 @@ const ResetPassword = ({ token }: tokenProps) => {
         });
       }
       const res = await dispatch(ResetPasswordAction(token, values.password));
-      if (res?.statusText === "OK") {
-        router.push("/SignIn");
+      if (res?.status === 200 || res?.statusText === "OK") {
+        return router.push("/SignIn");
       }
     } catch (error) {
       console.error("Changed of password failed:", error);

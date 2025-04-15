@@ -28,7 +28,7 @@ const ResetPasswordContent = () => {
   useEffect(() => {
     if (!token) {
       toast.error("Invalid token");
-      router.push("https://to-do-frontend-theta.vercel.app/SignIn");
+      router.push("/SignIn");
     }
   }, [router, token]);
 

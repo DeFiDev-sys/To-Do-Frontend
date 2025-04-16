@@ -58,7 +58,11 @@ const TaskCard: React.FC<Task> = ({ task }) => {
       <CardDescription className='px-6'>
         <div className='flex justify-between items-center'>
           <span>Reminder : {formatDate(task.reminderAt)}</span>
-          {task.notified ? <BellRingIcon fill='green' className='hu_hu_' /> : ""}
+          {task.notified ? (
+            <BellRingIcon fill='green' className={`hu_hu_ ${task.status === "done" ? "hidden" : "block"}`} />
+          ) : (
+            ""
+          )}
         </div>
       </CardDescription>
 

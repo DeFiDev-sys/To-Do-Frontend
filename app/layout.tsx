@@ -39,6 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
+      <link
+        href='https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css'
+        rel='stylesheet'></link>
       <body className={""}>
         <ThemeProvider attribute='class' defaultTheme='light' enableSystem disableTransitionOnChange>
           <ReduxProvider>

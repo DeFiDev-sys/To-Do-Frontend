@@ -20,11 +20,11 @@ export const GetTaskAction = () => async (dispatch:AppDispatch) => {
 };
 
 //Create new tasks
-export const CreateTaskAction = (title:string,description:string) => async (dispatch:AppDispatch) => {
+export const CreateTaskAction = (title: string, description: string, reminderAt: Date | null) => async (dispatch:AppDispatch) => {
     dispatch(setLoading(true));
 
     try {
-        const {data} = await apiClient.post<taskData>('/tasks/create_Task',{title,description})
+        const {data} = await apiClient.post<taskData>('/tasks/create_Task',{title,description,reminderAt})
         dispatch(addTask(data))
         return data
     } catch (error) {
@@ -35,11 +35,11 @@ export const CreateTaskAction = (title:string,description:string) => async (disp
 }
 
 //Upadate Tasks
-export const UpdateTaskAction = (_id:string,title:string,description:string,status:string) => async (dispatch:AppDispatch) =>{
+export const UpdateTaskAction = (_id:string,title:string,description:string,status:string,reminderAt:Date | null) => async (dispatch:AppDispatch) =>{
     dispatch(setLoading(true))
 
     try {
-        const response = await apiClient.patch<taskData>(`/tasks/update_Task/${_id}`,{title,description,status})
+        const response = await apiClient.patch<taskData>(`/tasks/update_Task/${_id}`,{title,description,status,reminderAt})
         dispatch(upDateTask(response.data))
         return response
     } catch (error) {

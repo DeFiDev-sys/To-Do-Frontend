@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { XIcon } from "lucide-react";
 import { CreateTaskSchema, state } from "@/types/definitions";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,6 +10,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "./ui/input";
 import { CreateTaskAction } from "@/reduxs/actions/TaskActions";
 import { toast } from "sonner";
+import { XIcon } from "lucide-react";
+import { Textarea } from "./ui/textarea";
 
 const CreatePopUpScreen = ({ setIsOpen }: state) => {
   const dispatch = useAppDispatch();
@@ -21,14 +22,17 @@ const CreatePopUpScreen = ({ setIsOpen }: state) => {
     defaultValues: {
       title: "",
       description: "",
+      reminderAt: new Date(),
     },
   });
 
   const onSubmit = async (values: z.infer<typeof CreateTaskSchema>) => {
     dispatch(setLoading(true));
 
+    const reminderAt = values.reminderAt || new Date();
+
     try {
-      const response = await dispatch(CreateTaskAction(values.title, values.description));
+      const response = await dispatch(CreateTaskAction(values.title, values.description, reminderAt));
 
       if (response) {
         setIsOpen(false);
@@ -90,11 +94,37 @@ const CreatePopUpScreen = ({ setIsOpen }: state) => {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input placeholder='Task Description' type='text' {...field} />
+                      <Textarea placeholder='Task Description' className='resize-none' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
+              />
+              <FormField
+                control={form.control}
+                name='reminderAt'
+                render={({ field }) => {
+                  // Convert Date to string for the input value
+                  const value = field.value instanceof Date ? field.value.toISOString().split("T")[0] : "";
+                  return (
+                    <FormItem>
+                      <FormLabel>Reminder Date</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder='Reminder Date'
+                          type='date'
+                          {...field}
+                          value={value}
+                          onChange={(e) => {
+                            field.onChange(e.target.value ? new Date(e.target.value) : null);
+                          }}
+                          className='flex flex-col justify-center  max-w-1/2'
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
               />
 
               <Button

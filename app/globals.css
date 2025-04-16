@@ -124,3 +124,7 @@
 .subMittbutton{
   @apply bg-blue-600 hover:bg-blue-400
 }
+
+.hu_hu_{
+  @apply animate-bounce
+}

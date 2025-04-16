@@ -6,6 +6,7 @@ import PopUpForm from "./PopUpForm";
 import { DeteleTaskAction, formatDate } from "@/reduxs/actions/TaskActions";
 import { useAppDispatch, useAppSelector } from "@/hooks/ReduxHooks";
 import { Badge } from "./ui/badge";
+import { BellRingIcon } from "lucide-react";
 
 const TaskCard: React.FC<Task> = ({ task }) => {
   const dispatch = useAppDispatch();
@@ -54,6 +55,12 @@ const TaskCard: React.FC<Task> = ({ task }) => {
         </Badge>
       </CardDescription>
       <CardDescription className='px-6'>Date : {formatDate(task.createdAt)}</CardDescription>
+      <CardDescription className='px-6'>
+        <div className='flex justify-between items-center'>
+          <span>Reminder : {formatDate(task.reminderAt)}</span>
+          {task.notified ? <BellRingIcon fill='green' className='hu_hu_' /> : ""}
+        </div>
+      </CardDescription>
 
       <CardContent className='px-6'>{isOpen && <PopUpForm setIsOpen={setIsOpen} task={task} />}</CardContent>
     </div>

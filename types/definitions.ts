@@ -37,11 +37,19 @@ export const RegisterSchema = z.object({
 export const CreateTaskSchema = z.object({
   title: z.string().min(2, { message: "Tile must be at least 2 characters long." }).toUpperCase().trim(),
   description: z.string().trim(),
+  reminderAt:z.union([
+    z.date(),
+    z.null(),
+  ]).optional(),
 });
 export const UpadateTaskSchema = z.object({
   title: z.string().min(2, { message: "Tile must be at least 2 characters long." }).toUpperCase().trim(),
-  description: z.string().trim(),
+  description: z.string().max(160,{message:"Description must not be longer than 30 characters."}).trim(),
   status: z.string().trim(),
+  reminderAt: z.union([
+    z.date(),
+    z.null(),
+  ]).optional(),
 });
 export const ForgetPasswordScheme = z.object({
   email: z.string().email("Invalid email address").trim(),
@@ -79,6 +87,8 @@ export type taskData = {
   title: string;
   description: string;
   status: "todo" | "in-progress" | "done";
+  reminderAt:string;
+  notified:boolean;
   createdAt: string;
   updatedAt: string;
 };

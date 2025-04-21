@@ -1,3 +1,4 @@
+import { deleteAuthToken } from "@/server/server";
 import { getUserFromLocalstorage, UserData, UserState, UserStatusProps } from "@/types/definitions";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
@@ -43,6 +44,7 @@ export const UserSlice = createSlice({
       state.userInfo = null;
       state.userStatus = null;
       localStorage.removeItem("userInfo");
+      deleteAuthToken();
     },
   },
 });
